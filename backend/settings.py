@@ -109,6 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://localhost:8000',
+    'https://maniccrusader-pre-prod.onrender.com',
+    'https://maniccrusader-pre-prod-api.onrender.com',
 )
 
 # Internationalization
