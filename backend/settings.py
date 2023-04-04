@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,15 +21,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-fub@2lls+cz6fg%$2_&qzokwlc&d+pisc@e*r$^l6=ej9o@!0+'
+SECRET_KEY = os.environ.get("DJNAGO_APP_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','maniccrusader-preprod.onrender.com','maniccrusader-preprod-api.onrender.com']
 
 
 # Application definition
+CORS_ALLOWED_HEADERS = [
+    '*',  # or '*' to allow all headers
+]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,7 +45,10 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'corsheaders',
     'rest_framework',
+    'oauth2_provider',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +63,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'backend.urls'
+
+OAUTH2_PROVIDER = {
+    "OIDC_ENABLED": True,
+    "OIDC_RSA_PRIVATE_KEY": "0tPqhxF6eFqsdNoXtDR6dhmD55gqbpa6hizpCeIA9ifAhsWTlu63Qu1NTzsYCkYc",
+    "SCOPES": {"all": "all scopes"},
+}
+
+LOGIN_URL = "/admin/login/"
 
 TEMPLATES = [
     {
@@ -73,6 +89,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+
+
 
 
 # Database
@@ -106,13 +124,37 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 #white react port
-CORS_ORIGIN_WHITELIST = (
+CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:3000',
     'https://maniccrusader-pre-prod.onrender.com',
     'https://maniccrusader-pre-prod-api.onrender.com',
-)
+    'https://www.printful.com',
+    'https://api.printful.com',
+]
 
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
