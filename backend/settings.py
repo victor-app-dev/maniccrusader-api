@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'corsheaders',
     'rest_framework',
-    'oauth2_provider',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -63,12 +62,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'backend.urls'
-
-OAUTH2_PROVIDER = {
-    "OIDC_ENABLED": True,
-    "OIDC_RSA_PRIVATE_KEY": "0tPqhxF6eFqsdNoXtDR6dhmD55gqbpa6hizpCeIA9ifAhsWTlu63Qu1NTzsYCkYc",
-    "SCOPES": {"all": "all scopes"},
-}
 
 LOGIN_URL = "/admin/login/"
 
@@ -89,9 +82,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
-
-
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
