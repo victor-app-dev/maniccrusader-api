@@ -47,3 +47,9 @@ def getProducts_hats(request):
     url = 'https://api.printful.com/store/products?category_id=15'
     response = requests.get(url, headers=headers)
     return JsonResponse(response.json())
+def getVariant_details(request, variant_id):
+    key = os.environ.get("STORE_TOKEN")
+    headers = {'Authorization': f'Bearer {key}'}
+    url = f'https://api.printful.com/store/variants/{variant_id}'
+    response = requests.get(url, headers=headers)
+    return JsonResponse(response.json())
